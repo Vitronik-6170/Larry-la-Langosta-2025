@@ -18,15 +18,15 @@ public final class Constants {
     public static final int kMechanismsControllerPort = 1;
   }
   public static class DriveConstants {
-    public static final int kFrontLeftDriveID = 2;
-    public static final int kFrontRightDriveID = 4;
-    public static final int kRearLeftDriveID = 6;
-    public static final int kRearRightDriveID = 8;
+    public static final int kFrontLeftDriveID = 8;
+    public static final int kFrontRightDriveID = 6;
+    public static final int kRearLeftDriveID = 4;
+    public static final int kRearRightDriveID = 2;
 
-    public static final int kFrontLeftAngleID = 3;
-    public static final int kFrontRightAngleID = 5;
-    public static final int kRearLeftAngleID = 7;
-    public static final int kRearRightAngleID = 9;
+    public static final int kFrontLeftAngleID = 9;
+    public static final int kFrontRightAngleID = 7;
+    public static final int kRearLeftAngleID = 5;
+    public static final int kRearRightAngleID = 3;
    
     public static final int kFrontLeftEncoderID = 1;
     public static final int kFrontRightEncoderID = 2;
@@ -44,38 +44,56 @@ public final class Constants {
     public static final double kTicksRearRight = 21;
   }
   public static class LiftConstants {
-    public static final int kLeftLiftMotorID = 10;
-    public static final int kRightLiftMotorID = 11;
-    public static final double kLiftPower = 0.9;
+    public static final int kLeftLiftMotorID = 11;
+    public static final int kRightLiftMotorID = 10;
+    public static final double kLiftPower = 0.8;
 
-    public static final double kLiftReef_L1 = 1;
-    public static final double kLiftReef_L2 = 2;
-    public static final double kLiftReef_L3 = 3;
+    public static final double kLiftFloor = 0;
+    public static final double kLiftHuman = 0;
+
+    public static final double kLEFTLiftReef_L1 = 68.81130981445;
+    public static final double kLEFTLiftReef_L2 = 0;
+    public static final double kLEFTLiftReef_L3 = 70.28549194335;
+    public static final double kLEFTLiftAlgae = 50.85717391967;
+
+    public static final double kRIGHTLiftReef_L1 = 68.57318878173;
+    public static final double kRIGHTLiftReef_L2 = 0;
+    public static final double kRIGHTLiftReef_L3 = 70.04737472534;
+    public static final double kRIGHTLiftAlgae = 50.54761886596;
+    
   }
   public static class IntakeConstants {
-    public static final int kIntakeMotorID = 12;
+    public static final int kIntakeMotorID = 15;
     public static final double kIntakePower = 0.9;
   }
   public static class WristConstants {
-    public static final int kWristMotorID = 13;
+    public static final int kWristMotorID = 16;
     public static final double kWristEncoderOffset = 0;
     public static final double kWristPower = 0.3;
+
+    public static final double verticalWrist = 3*Math.PI/2;
+    public static final double horizontalWrist = 0;
+
+    public static final double kWristReeft_L1 = horizontalWrist;
+    public static final double kWristReeft_L2 = verticalWrist;
+    public static final double kWristReeft_L3 = verticalWrist;
+
   }
   public static class ArmConstants {
     public static final int kArmMotorID = 14;
     public static final double kArmEncoderOffset = 0.71;
-    public static final double kArmPower = 0.2;
+    public static final double kArmPower = 0.3;
 
-    public static final double kArmFloor = 0;
-    public static final double kArmHuman = 0;
+    public static final double kArmFloor = Math.PI/3;
+    public static final double kArmHuman = 2.768913307189941;
 
-    public static final double kArmReef_L1 = 0;
-    public static final double kArmReef_L2 = 0;
-    public static final double kArmReef_L3 = 0;
+    public static final double kArmReef_L1 = 4.889863929748;
+    public static final double kArmReef_L2 = 3.838535308837;
+    public static final double kArmReef_L3 = 3.740459442138;
   }
   public static class CageConstants {
-    public static final int kLeftCageMotorID = 15;
-    public static final int kRightCageMotorID = 16;
+    public static final int kLeftCageMotorID = 13;
+    public static final int kRightCageMotorID = 12;
     public static final double kCagePower = 0.9;
   }
   

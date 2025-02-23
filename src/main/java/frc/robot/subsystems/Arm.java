@@ -27,7 +27,7 @@ public class Arm extends SubsystemBase {
   private final AbsoluteEncoder armEncoder;
   private final SparkClosedLoopController armController;
 
-  private int positionIndex = 0;
+  private int positionIndex = -1;
   private static final double[] POSITIONS = {Constants.ArmConstants.kArmReef_L1, Constants.ArmConstants.kArmReef_L2, Constants.ArmConstants.kArmReef_L3};
 
   public Arm() {
@@ -61,6 +61,15 @@ public class Arm extends SubsystemBase {
     setPosition();
   }
 
+  public void adjustArmUp(){
+    double position = getArmPosition();
+    armController.setReference(position+Math.PI/18, ControlType.kPosition);
+  }
+  public void adjustArmDown(){
+    double position = getArmPosition();
+    armController.setReference(position-Math.PI/18, ControlType.kPosition);
+  }
+
   private void setPosition() {
     double position = POSITIONS[positionIndex];
     armController.setReference(position, ControlType.kPosition);
@@ -91,8 +100,8 @@ public class Arm extends SubsystemBase {
     armController.setReference(position, ControlType.kPosition);
   }
 
-  public void getArmPosition(){
-   armEncoder.getPosition();
+  public double getArmPosition(){
+    return armEncoder.getPosition();
   }
 
   /**

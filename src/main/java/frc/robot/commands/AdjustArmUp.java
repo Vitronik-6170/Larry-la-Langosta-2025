@@ -5,36 +5,28 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.Wrist;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class ReefDown extends Command {
+public class AdjustArmUp extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Arm m_Arm;
-  private final Lift m_Lift;
-  private final Wrist m_Wrist;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ReefDown(Arm m_Arm, Lift m_Lift, Wrist m_Wrist) {
+  public AdjustArmUp(Arm m_Arm) {
     this.m_Arm = m_Arm;
-    this.m_Lift = m_Lift;
-    this.m_Wrist = m_Wrist;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_Arm, m_Lift, m_Wrist);
+    addRequirements(m_Arm);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Arm.decreasePosition();
-    m_Lift.decreaseLevel();
-    m_Wrist.verticalWrist();
+    m_Arm.adjustArmUp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

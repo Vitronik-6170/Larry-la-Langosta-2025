@@ -10,7 +10,7 @@ import frc.robot.subsystems.Wrist;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class ReefDown extends Command {
+public class Floor extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Arm m_Arm;
   private final Lift m_Lift;
@@ -21,7 +21,7 @@ public class ReefDown extends Command {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ReefDown(Arm m_Arm, Lift m_Lift, Wrist m_Wrist) {
+  public Floor(Arm m_Arm, Lift m_Lift, Wrist m_Wrist) {
     this.m_Arm = m_Arm;
     this.m_Lift = m_Lift;
     this.m_Wrist = m_Wrist;
@@ -32,9 +32,9 @@ public class ReefDown extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Arm.decreasePosition();
-    m_Lift.decreaseLevel();
-    m_Wrist.verticalWrist();
+    this.m_Arm.grabFromFloor();
+    this.m_Lift.goToFloor();
+    this.m_Wrist.horizontalWrist();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

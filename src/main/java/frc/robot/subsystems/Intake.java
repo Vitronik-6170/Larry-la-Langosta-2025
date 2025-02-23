@@ -21,44 +21,19 @@ public class Intake extends SubsystemBase {
   private final SparkMaxConfig intakeConfig;
   private final SparkMax intakeMotor;
 
-  private int powerLevel=0;
-  private static final double[] POWER_LEVELS = {0, 0.2, 1.0}; // Define power levels
-
   public Intake() {
     intakeConfig = new SparkMaxConfig();
-    intakeConfig.idleMode(IdleMode.kCoast);
-    intakeConfig.inverted(false);
+    intakeConfig.idleMode(IdleMode.kBrake);
+    intakeConfig.inverted(true);
 
     intakeMotor = new SparkMax(Constants.IntakeConstants.kIntakeMotorID, MotorType.kBrushless);
     intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
-  // public void grabGamePiece(boolean isPressed){
-  //   intakeMotor.set(Constants.IntakeConstants.kIntakePower);
-  // }
-  // public void releaseGamePiece(){
-  //   intakeMotor.set(-Constants.IntakeConstants.kIntakePower);
-  // }
-  // public void stopIntake(){
-  //   intakeMotor.set(0);
-  // }
-
-  public void increasePowerLevel() {
-    if (powerLevel < POWER_LEVELS.length - 1) {
-      powerLevel++;
-    }
-    setPowerLevel();
-  }
-
-  public void decreasePowerLevel() {
-    if (powerLevel > 0) {
-      powerLevel--;
-    }
-    setPowerLevel();
-  }
-
-  private void setPowerLevel() {
-    double power = POWER_LEVELS[powerLevel];
+  public void grabGamePiece(double power){
     intakeMotor.set(power);
+  }
+  public void stopIntake(){
+    intakeMotor.set(0);
   }
 
   /**

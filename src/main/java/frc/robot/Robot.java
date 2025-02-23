@@ -7,9 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
+import frc.robot.commands.GrabGamePiece;
 import frc.robot.commands.PruebaAuto;
 
 /**
@@ -23,7 +25,7 @@ public class Robot extends TimedRobot {
   private final RobotContainer m_robotContainer;
   @SuppressWarnings("unused")
   private final PowerDistribution pdh;
-  private final Command drive, auto;
+  private final Command drive, auto, grabGamePiece;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -32,10 +34,13 @@ public class Robot extends TimedRobot {
   public Robot() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    pdh = new PowerDistribution(1, ModuleType.kRev);
+
     m_robotContainer = new RobotContainer();
+
     drive = new Drive(m_robotContainer.m_swerveDrive);
     auto = new PruebaAuto(m_robotContainer.m_swerveDrive);
-    pdh = new PowerDistribution(1, ModuleType.kRev);
+    grabGamePiece = new GrabGamePiece(m_robotContainer.m_Intake);
   }
 
   /**
@@ -98,12 +103,17 @@ public class Robot extends TimedRobot {
     if(drive != null){
       drive.schedule();
     }
-    
+    if(grabGamePiece != null){
+      grabGamePiece.schedule();
+    }   
   }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    //SmartDashboard.putNumber("BRAZO", m_robotContainer.m_Arm.getArmPosition());
+    m_robotContainer.m_swerveDrive.anglesnavx();
+  }
 
   @Override
   public void testInit() {

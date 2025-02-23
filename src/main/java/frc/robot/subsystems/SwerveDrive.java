@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -32,12 +33,12 @@ public class SwerveDrive extends SubsystemBase {
     int L = 1, W = 1;
     double r = Math.sqrt((L*L)+(W*W));
     y1 *= -1;
-
+    
     if (Math.abs(x1) < 0.15 && Math.abs(y1) < 0.15 && Math.abs(x2) < 0.15) {
         x1 = 0; y1 = 0; x2 = 0;
     }
 
-    double angleNaVX = Math.toRadians((navx.getAngle())%360);
+    double angleNaVX = Math.toRadians((0)%360);
 
     double matrizR[][] = new double[2][2];
     double ejesR[][] = new double[1][2];
@@ -101,6 +102,12 @@ public class SwerveDrive extends SubsystemBase {
     frontRight.desiredState(frontRightSpeed, frontRightAngle, Constants.DriveConstants.kTicksFrontRight);
     rearLeft.desiredState(backLeftSpeed, backLeftAngle, Constants.DriveConstants.kTicksRearLeft);
     rearRight.desiredState(backRightSpeed, backRightAngle, Constants.DriveConstants.kTicksRearRight);
+  }
+  public void anglesnavx(){
+    SmartDashboard.putNumber("NAVX Roll", navx.getRoll());
+    SmartDashboard.putNumber("NAVX pITCH", navx.getPitch());
+    SmartDashboard.putNumber("NAVX Yaw", navx.getYaw());
+    SmartDashboard.putNumber("NAVX NORMAL", navx.getAngle());
   }
 
   private double normalizeAngle(double angle) {

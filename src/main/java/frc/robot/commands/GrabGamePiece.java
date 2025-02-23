@@ -4,46 +4,44 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.Wrist;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class ReefDown extends Command {
+public class GrabGamePiece extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Arm m_Arm;
-  private final Lift m_Lift;
-  private final Wrist m_Wrist;
+  private final Intake m_Intake;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ReefDown(Arm m_Arm, Lift m_Lift, Wrist m_Wrist) {
-    this.m_Arm = m_Arm;
-    this.m_Lift = m_Lift;
-    this.m_Wrist = m_Wrist;
+  public GrabGamePiece(Intake m_Intake) {
+    this.m_Intake = m_Intake;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_Arm, m_Lift, m_Wrist);
+    addRequirements(m_Intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_Arm.decreasePosition();
-    m_Lift.decreaseLevel();
-    m_Wrist.verticalWrist();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    double rightTrigger = RobotContainer.m_mechanismsController.getRightTriggerAxis();
+    double leftTrgger = RobotContainer.m_mechanismsController.getLeftTriggerAxis();
+    double speed = rightTrigger - (leftTrgger*0.2);
+    m_Intake.grabGamePiece(speed);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_Intake.stopIntake();
+  }
 
   // Returns true when the command should end.
   @Override

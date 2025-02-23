@@ -5,13 +5,20 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AdjustArmDown;
+import frc.robot.commands.AdjustArmUp;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Floor;
+import frc.robot.commands.Human;
 import frc.robot.commands.ReefDown;
 import frc.robot.commands.ReefUp;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.Wrist;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -27,6 +34,9 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final SwerveDrive m_swerveDrive = new SwerveDrive();
   public final Intake m_Intake;
+  public final Arm m_Arm;
+  public final Lift m_Lift; 
+  public final Wrist m_Wrist;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public static CommandXboxController m_driverController =
@@ -37,9 +47,13 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    configureBindings();
-
     m_Intake = new Intake();
+    m_Arm = new Arm();
+    m_Lift = new Lift();
+    m_Wrist = new Wrist();
+
+
+    configureBindings();
 
     
   }
@@ -60,8 +74,12 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_mechanismsController.y().whileTrue(new ReefUp(m_Intake));
-    m_mechanismsController.a().whileTrue(new ReefDown(m_Intake));
+    m_mechanismsController.rightBumper().whileTrue(new ReefUp(m_Arm, m_Lift, m_Wrist));
+    m_mechanismsController.leftBumper().whileTrue(new ReefDown(m_Arm, m_Lift, m_Wrist));
+    m_mechanismsController.a().whileTrue(new Floor(m_Arm, m_Lift, m_Wrist));  
+    m_mechanismsController.x().whileTrue(new Human(m_Arm, m_Lift, m_Wrist));
+    m_mechanismsController.pov(0).whileTrue(new AdjustArmUp(m_Arm));
+    m_mechanismsController.pov(180).whileTrue(new AdjustArmDown(m_Arm));
   }
 
   /**

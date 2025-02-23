@@ -31,9 +31,9 @@ public class Drive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double x = RobotContainer.m_driverController.getLeftX();
-    double y = RobotContainer.m_driverController.getLeftY();
-    double z = RobotContainer.m_driverController.getRightX();
+    double x = RobotContainer.m_mechanismsController.getLeftX();
+    double y = RobotContainer.m_mechanismsController.getLeftY();
+    double z = RobotContainer.m_mechanismsController.getRightX();
 
     m_SwerveDrive.drive(x, y, z);
   }

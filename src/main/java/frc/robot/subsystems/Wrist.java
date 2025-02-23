@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.Dictionary;
+
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
@@ -25,6 +27,10 @@ public class Wrist extends SubsystemBase {
   private final SparkMax wristMotor;
   private final AbsoluteEncoder wristEncoder;
   private final SparkClosedLoopController wristController;
+
+  private int positionWrist = -1;
+  private static final double [] POSITIONS = {Constants.WristConstants.kWristReeft_L1, Constants.WristConstants.kWristReeft_L2, Constants.WristConstants.kWristReeft_L2};
+
   public Wrist() {
     
     wristConfig = new SparkMaxConfig();
@@ -44,13 +50,31 @@ public class Wrist extends SubsystemBase {
     wristController = wristMotor.getClosedLoopController();
     wristMotor.configure(wristConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
-
-  public void verticalWrist() {
-    wristController.setReference(0, ControlType.kPosition);
+  public void increasePosition(){
+    if (positionWrist < POSITIONS.length - 1) {
+      positionWrist++;
+    }
+    setPosition();
   }
 
-  public void horizontalWrist() {
+  public void decreasePosition(){
+    if (positionWrist > 0) {
+      positionWrist--;
+    }
+    setPosition();
+  }
+
+
+  private void setPosition() {
+    double position = POSITIONS[positionWrist];
+    wristController.setReference(position, ControlType.kPosition);
+  }
+
+  public void verticalWrist() {
     wristController.setReference(3*Math.PI/2, ControlType.kPosition);
+  }
+  public void horizontalWrist() {
+    wristController.setReference(0, ControlType.kPosition);
   }
 
   public void getAbsoluteEncoder() {
