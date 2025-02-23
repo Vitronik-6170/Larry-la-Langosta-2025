@@ -5,10 +5,13 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.AbsoluteEncoder;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
@@ -24,6 +27,7 @@ public class Cage extends SubsystemBase {
   private final SparkMaxConfig right_cageConfig;
   private final SparkMax right_cageMotor;
   private final AbsoluteEncoder right_cageAbsoluteEncoder;
+  private final SparkClosedLoopController right_cageController;
   
   public Cage() {
     left_cageConfig = new SparkMaxConfig();
@@ -33,16 +37,23 @@ public class Cage extends SubsystemBase {
     right_cageConfig = new SparkMaxConfig();
     right_cageConfig.idleMode(IdleMode.kBrake);
     right_cageConfig.inverted(true);
+    right_cageConfig.absoluteEncoder.inverted(false);
+    right_cageConfig.absoluteEncoder.positionConversionFactor(2*Math.PI);
+    right_cageConfig.absoluteEncoder.zeroOffset(Constants.CageConstants.kCageEncoderOffset);
+    right_cageConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
+    right_cageConfig.closedLoop.pid(1, 0, 0);
+    right_cageConfig.closedLoop.outputRange(-Constants.CageConstants.kCagePower, Constants.CageConstants.kCagePower);
 
     left_cageMotor = new SparkMax(Constants.CageConstants.kLeftCageMotorID, MotorType.kBrushless);
     left_cageMotor.configure(left_cageConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     right_cageMotor = new SparkMax(Constants.CageConstants.kRightCageMotorID, MotorType.kBrushless);
     right_cageAbsoluteEncoder = right_cageMotor.getAbsoluteEncoder();
+    right_cageController = right_cageMotor.getClosedLoopController();
     right_cageMotor.configure(right_cageConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
   public void prepareToHang() {
-    right_cageMotor.set(-0.5);
+    right_cageController.setReference(Constants.CageConstants.kCagePrepareToHang, ControlType.kPosition);
   }
   public void hang() {
     right_cageMotor.set(1);

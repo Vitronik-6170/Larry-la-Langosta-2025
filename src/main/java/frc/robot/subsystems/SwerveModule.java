@@ -85,7 +85,7 @@ public class SwerveModule extends SubsystemBase {
     driveController.setReference((distance*ticks)/(Math.PI*diameter), ControlType.kPosition);
   }
   public void diagonal(double y, double x){
-    double hipotenusa = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    double hipotenusa = (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(x/Math.abs(x));
     desiredDistance(hipotenusa);
   }
   public double getDiagonalAngle(double y, double x){

@@ -38,7 +38,7 @@ public class SwerveDrive extends SubsystemBase {
         x1 = 0; y1 = 0; x2 = 0;
     }
 
-    double angleNaVX = Math.toRadians((0)%360);
+    double angleNaVX = Math.toRadians((navx.getAngle())%360);
 
     double matrizR[][] = new double[2][2];
     double ejesR[][] = new double[1][2];
@@ -103,12 +103,6 @@ public class SwerveDrive extends SubsystemBase {
     rearLeft.desiredState(backLeftSpeed, backLeftAngle, Constants.DriveConstants.kTicksRearLeft);
     rearRight.desiredState(backRightSpeed, backRightAngle, Constants.DriveConstants.kTicksRearRight);
   }
-  public void anglesnavx(){
-    SmartDashboard.putNumber("NAVX Roll", navx.getRoll());
-    SmartDashboard.putNumber("NAVX pITCH", navx.getPitch());
-    SmartDashboard.putNumber("NAVX Yaw", navx.getYaw());
-    SmartDashboard.putNumber("NAVX NORMAL", navx.getAngle());
-  }
 
   private double normalizeAngle(double angle) {
     angle %= 1;
@@ -116,6 +110,38 @@ public class SwerveDrive extends SubsystemBase {
     if (angle < -0.5) angle += 1.0;
     return angle;
   }
+  
+  public void odometriTurn(double angle){
+    double error = 15;  //-100                        -80
+    double absoluteAngle=(navx.getAngle()%360);
+    if(angle>((absoluteAngle+180)%360)){
+      if((angle>((absoluteAngle-error)%360))&&(angle<((absoluteAngle+error%360)))){
+        frontLeft.desiredState(0, 0.125, Constants.DriveConstants.kTicksFrontLeft);
+        frontRight.desiredState(0, -0.125, Constants.DriveConstants.kTicksFrontRight);
+        rearLeft.desiredState(0, -0.125, Constants.DriveConstants.kTicksRearLeft);
+        rearRight.desiredState(0, 0.125, Constants.DriveConstants.kTicksRearRight);
+      }else{
+        frontLeft.desiredState(0.4, 0.125, Constants.DriveConstants.kTicksFrontLeft);
+        frontRight.desiredState(-0.4, -0.125, Constants.DriveConstants.kTicksFrontRight);
+        rearLeft.desiredState(0.4, -0.125, Constants.DriveConstants.kTicksRearLeft);
+        rearRight.desiredState(-0.4, 0.125, Constants.DriveConstants.kTicksRearRight);
+      }
+    }else{
+      if((angle>((absoluteAngle-error)%360))&&(angle<((absoluteAngle+error%360))))
+      {
+        frontLeft.desiredState(0, 0.125, Constants.DriveConstants.kTicksFrontLeft);
+        frontRight.desiredState(0, -0.125, Constants.DriveConstants.kTicksFrontRight);
+        rearLeft.desiredState(0, -0.125, Constants.DriveConstants.kTicksRearLeft);
+        rearRight.desiredState(0, 0.125, Constants.DriveConstants.kTicksRearRight);
+      }else{
+        frontLeft.desiredState(-0.4, 0.125, Constants.DriveConstants.kTicksFrontLeft);
+        frontRight.desiredState(0.4, -0.125, Constants.DriveConstants.kTicksFrontRight);
+        rearLeft.desiredState(-0.4, -0.125, Constants.DriveConstants.kTicksRearLeft);
+        rearRight.desiredState(0.4, 0.125, Constants.DriveConstants.kTicksRearRight);
+      }
+    }
+  }
+
   public void noPTR(){
     frontLeft.resetToAbsolute(Constants.DriveConstants.kTicksFrontLeft);
     frontRight.resetToAbsolute(Constants.DriveConstants.kTicksFrontRight);

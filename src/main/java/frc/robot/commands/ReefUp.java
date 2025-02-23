@@ -34,7 +34,7 @@ public class ReefUp extends Command {
   public void initialize() {
    m_Arm.increasePosition();
    m_Lift.increaseLevel();
-   m_Wrist.verticalWrist();
+   m_Wrist.increasePosition();
   }
 
  

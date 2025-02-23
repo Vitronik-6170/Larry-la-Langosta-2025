@@ -85,7 +85,7 @@ public final class Constants {
     public static final double kArmPower = 0.3;
 
     public static final double kArmFloor = Math.PI/3;
-    public static final double kArmHuman = 2.768913307189941;
+    public static final double kArmHuman = 2.788913307189941;
 
     public static final double kArmReef_L1 = 4.889863929748;
     public static final double kArmReef_L2 = 3.838535308837;
@@ -95,6 +95,10 @@ public final class Constants {
     public static final int kLeftCageMotorID = 13;
     public static final int kRightCageMotorID = 12;
     public static final double kCagePower = 0.9;
+
+    public static final double kCageEncoderOffset = 0;
+    public static final double kCagePrepareToHang = 0.5;
+    public static final double kCageHang = 1;
   }
   
 }

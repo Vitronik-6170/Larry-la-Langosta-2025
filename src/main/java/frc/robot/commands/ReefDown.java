@@ -34,7 +34,7 @@ public class ReefDown extends Command {
   public void initialize() {
     m_Arm.decreasePosition();
     m_Lift.decreaseLevel();
-    m_Wrist.verticalWrist();
+    m_Wrist.decreasePosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

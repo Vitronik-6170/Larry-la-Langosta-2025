@@ -112,7 +112,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //SmartDashboard.putNumber("BRAZO", m_robotContainer.m_Arm.getArmPosition());
-    m_robotContainer.m_swerveDrive.anglesnavx();
   }
 
   @Override
