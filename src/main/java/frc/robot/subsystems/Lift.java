@@ -30,7 +30,7 @@ public class Lift extends SubsystemBase {
   private final RelativeEncoder right_liftEncoder;
   private final SparkClosedLoopController right_liftController;
 
-  private int levelIndex = -1;
+  private int levelIndex = 0;
   private static final double[] LEFT_LEVELS = {Constants.LiftConstants.kLEFTLiftReef_L1, Constants.LiftConstants.kLEFTLiftReef_L2, Constants.LiftConstants.kLEFTLiftReef_L3};
   private static final double[] RIGHT_LEVELS = {Constants.LiftConstants.kRIGHTLiftReef_L1, Constants.LiftConstants.kRIGHTLiftReef_L2, Constants.LiftConstants.kRIGHTLiftReef_L3};
 

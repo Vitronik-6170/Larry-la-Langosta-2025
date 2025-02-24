@@ -4,39 +4,35 @@
 
 package frc.robot.commands;
 
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.Cage;
+import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class Drive extends Command {
+public class Hang extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final SwerveDrive m_SwerveDrive;
+  private final Cage m_Cage;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Drive(SwerveDrive subsystem) {
-    m_SwerveDrive = subsystem;
+  public Hang(Cage m_Cage) {
+    this.m_Cage = m_Cage;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(m_Cage);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_Cage.hang();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    double x = RobotContainer.m_driverController.getLeftX();
-    double y = RobotContainer.m_driverController.getLeftY();
-    double z = RobotContainer.m_driverController.getRightX();
-
-    m_SwerveDrive.drive(x, y, z);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

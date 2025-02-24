@@ -89,7 +89,7 @@ public class SwerveModule extends SubsystemBase {
     desiredDistance(hipotenusa);
   }
   public double getDiagonalAngle(double y, double x){
-    double angle = Math.atan(x/y);
+    double angle = Math.toDegrees(Math.atan(y/x));
     return angle*0.5/180;
   }
   public void resetToAbsolute(double ticks){

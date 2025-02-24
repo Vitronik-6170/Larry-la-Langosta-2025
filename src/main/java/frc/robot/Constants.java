@@ -51,14 +51,14 @@ public final class Constants {
     public static final double kLiftFloor = 0;
     public static final double kLiftHuman = 0;
 
-    public static final double kLEFTLiftReef_L1 = 68.81130981445;
+    public static final double kLEFTLiftReef_L1 = 70.81130981445;
     public static final double kLEFTLiftReef_L2 = 0;
-    public static final double kLEFTLiftReef_L3 = 70.28549194335;
+    public static final double kLEFTLiftReef_L3 = 74.28549194335;
     public static final double kLEFTLiftAlgae = 50.85717391967;
 
-    public static final double kRIGHTLiftReef_L1 = 68.57318878173;
+    public static final double kRIGHTLiftReef_L1 = 70.57318878173;
     public static final double kRIGHTLiftReef_L2 = 0;
-    public static final double kRIGHTLiftReef_L3 = 70.04737472534;
+    public static final double kRIGHTLiftReef_L3 = 74.04737472534;
     public static final double kRIGHTLiftAlgae = 50.54761886596;
     
   }
@@ -84,21 +84,28 @@ public final class Constants {
     public static final double kArmEncoderOffset = 0.71;
     public static final double kArmPower = 0.3;
 
-    public static final double kArmFloor = Math.PI/3;
-    public static final double kArmHuman = 2.788913307189941;
+    public static final double kArmInit = 3;
 
-    public static final double kArmReef_L1 = 4.889863929748;
+    public static final double kArmFloor = Math.PI/3;
+    public static final double kArmHuman = 2.778913307189941;
+
+    public static final double kArmReef_L1 = 4.689863929748;
     public static final double kArmReef_L2 = 3.838535308837;
     public static final double kArmReef_L3 = 3.740459442138;
   }
   public static class CageConstants {
-    public static final int kLeftCageMotorID = 13;
-    public static final int kRightCageMotorID = 12;
-    public static final double kCagePower = 0.9;
+    public static final int kLeftCageMotorID = 12;
+    public static final int kRightCageMotorID = 13;
+    public static final double kCagePower = 0.1;
 
-    public static final double kCageEncoderOffset = 0;
-    public static final double kCagePrepareToHang = 0.5;
-    public static final double kCageHang = 1;
+    public static final double kCageEncoderOffset = 0.5;
+    public static final double kCagePrepareToHang = Math.PI/2;
+    public static final double kCageHang =Math.PI;
+    
+    public static final double kKaleb = 4.18;
+    public static final double kLeft_PowerCageHang = 0.1;
+    public static final double kRight_PowerCageHang = kLeft_PowerCageHang * kKaleb;
+
   }
   
 }

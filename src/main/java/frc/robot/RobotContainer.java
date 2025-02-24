@@ -8,12 +8,17 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AdjustArmDown;
 import frc.robot.commands.AdjustArmUp;
 import frc.robot.commands.Autos;
+import frc.robot.commands.DesHanging;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Floor;
+import frc.robot.commands.Hang;
+import frc.robot.commands.Hanging;
 import frc.robot.commands.Human;
+import frc.robot.commands.PrepareToHang;
 import frc.robot.commands.ReefDown;
 import frc.robot.commands.ReefUp;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Cage;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Lift;
@@ -37,6 +42,7 @@ public class RobotContainer {
   public final Arm m_Arm;
   public final Lift m_Lift; 
   public final Wrist m_Wrist;
+  public final Cage m_Cage;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public static CommandXboxController m_driverController =
@@ -51,6 +57,7 @@ public class RobotContainer {
     m_Arm = new Arm();
     m_Lift = new Lift();
     m_Wrist = new Wrist();
+    m_Cage = new Cage();
 
 
     configureBindings();
@@ -80,6 +87,10 @@ public class RobotContainer {
     m_mechanismsController.x().whileTrue(new Human(m_Arm, m_Lift, m_Wrist));
     m_mechanismsController.pov(0).whileTrue(new AdjustArmUp(m_Arm));
     m_mechanismsController.pov(180).whileTrue(new AdjustArmDown(m_Arm));
+    m_mechanismsController.pov(90).whileTrue(new PrepareToHang(m_Cage));
+    m_mechanismsController.pov(270).whileTrue(new Hang(m_Cage));
+    m_mechanismsController.b().whileTrue(new Hanging(m_Cage));
+    m_mechanismsController.y().whileTrue(new DesHanging(m_Cage));
   }
 
   /**

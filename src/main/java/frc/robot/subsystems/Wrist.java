@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.Dictionary;
-
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
@@ -28,7 +26,7 @@ public class Wrist extends SubsystemBase {
   private final AbsoluteEncoder wristEncoder;
   private final SparkClosedLoopController wristController;
 
-  private int positionWrist = -1;
+  private int positionWrist = 0;
   private static final double [] POSITIONS = {Constants.WristConstants.kWristReeft_L1, Constants.WristConstants.kWristReeft_L2, Constants.WristConstants.kWristReeft_L2};
 
   public Wrist() {

@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -112,35 +111,55 @@ public class SwerveDrive extends SubsystemBase {
   }
   
   public void odometriTurn(double angle){
-    double error = 15;  //-100                        -80
-    double absoluteAngle=(navx.getAngle()%360);
-    if(angle>((absoluteAngle+180)%360)){
-      if((angle>((absoluteAngle-error)%360))&&(angle<((absoluteAngle+error%360)))){
-        frontLeft.desiredState(0, 0.125, Constants.DriveConstants.kTicksFrontLeft);
-        frontRight.desiredState(0, -0.125, Constants.DriveConstants.kTicksFrontRight);
-        rearLeft.desiredState(0, -0.125, Constants.DriveConstants.kTicksRearLeft);
-        rearRight.desiredState(0, 0.125, Constants.DriveConstants.kTicksRearRight);
-      }else{
-        frontLeft.desiredState(0.4, 0.125, Constants.DriveConstants.kTicksFrontLeft);
-        frontRight.desiredState(-0.4, -0.125, Constants.DriveConstants.kTicksFrontRight);
-        rearLeft.desiredState(0.4, -0.125, Constants.DriveConstants.kTicksRearLeft);
-        rearRight.desiredState(-0.4, 0.125, Constants.DriveConstants.kTicksRearRight);
-      }
-    }else{
-      if((angle>((absoluteAngle-error)%360))&&(angle<((absoluteAngle+error%360))))
-      {
-        frontLeft.desiredState(0, 0.125, Constants.DriveConstants.kTicksFrontLeft);
-        frontRight.desiredState(0, -0.125, Constants.DriveConstants.kTicksFrontRight);
-        rearLeft.desiredState(0, -0.125, Constants.DriveConstants.kTicksRearLeft);
-        rearRight.desiredState(0, 0.125, Constants.DriveConstants.kTicksRearRight);
-      }else{
-        frontLeft.desiredState(-0.4, 0.125, Constants.DriveConstants.kTicksFrontLeft);
-        frontRight.desiredState(0.4, -0.125, Constants.DriveConstants.kTicksFrontRight);
-        rearLeft.desiredState(-0.4, -0.125, Constants.DriveConstants.kTicksRearLeft);
-        rearRight.desiredState(0.4, 0.125, Constants.DriveConstants.kTicksRearRight);
-      }
+    double error = 1.5;  // Ajusta el rango de error a un valor más pequeño
+    double absoluteAngle = (navx.getAngle() % 360);
+    System.out.println("Angle: " + angle);
+    System.out.println("Absolute Angle: " + absoluteAngle);
+
+    double angleDifference = ((angle - absoluteAngle + 360) % 360);
+    if (angleDifference > 180) {
+        angleDifference -= 360;
     }
-  }
+
+    if (Math.abs(angleDifference) < error) {
+        // Dentro del rango de error, detener el movimiento
+        System.out.println("Angle within error range, stopping");
+        frontLeft.desiredState(0, 0, Constants.DriveConstants.kTicksFrontLeft);
+        frontRight.desiredState(0, 0, Constants.DriveConstants.kTicksFrontRight);
+        rearLeft.desiredState(0, 0, Constants.DriveConstants.kTicksRearLeft);
+        rearRight.desiredState(0, 0, Constants.DriveConstants.kTicksRearRight);
+    } else if (angleDifference > 0) {
+        // Ajuste en sentido horario
+        if (Math.abs(angleDifference) < error * 10) {
+            System.out.println("Small adjustment clockwise");
+            frontLeft.desiredState(0, 0.0125, Constants.DriveConstants.kTicksFrontLeft);
+            frontRight.desiredState(0, -0.125, Constants.DriveConstants.kTicksFrontRight);
+            rearLeft.desiredState(0, -0.125, Constants.DriveConstants.kTicksRearLeft);
+            rearRight.desiredState(0, 0.125, Constants.DriveConstants.kTicksRearRight);
+        } else {
+            System.out.println("Large adjustment clockwise");
+            frontLeft.desiredState(0.4, 0.125, Constants.DriveConstants.kTicksFrontLeft);
+            frontRight.desiredState(-0.4, -0.125, Constants.DriveConstants.kTicksFrontRight);
+            rearLeft.desiredState(0.4, -0.125, Constants.DriveConstants.kTicksRearLeft);
+            rearRight.desiredState(-0.4, 0.125, Constants.DriveConstants.kTicksRearRight);
+        }
+    } else {
+        // Ajuste en sentido antihorario
+        if (Math.abs(angleDifference) < error * 10) {
+            System.out.println("Small adjustment counterclockwise");
+            frontLeft.desiredState(0, 0.125, Constants.DriveConstants.kTicksFrontLeft);
+            frontRight.desiredState(0, -0.125, Constants.DriveConstants.kTicksFrontRight);
+            rearLeft.desiredState(0, -0.125, Constants.DriveConstants.kTicksRearLeft);
+            rearRight.desiredState(0, 0.125, Constants.DriveConstants.kTicksRearRight);
+        } else {
+            System.out.println("Large adjustment counterclockwise");
+            frontLeft.desiredState(-0.4, 0.125, Constants.DriveConstants.kTicksFrontLeft);
+            frontRight.desiredState(0.4, -0.125, Constants.DriveConstants.kTicksFrontRight);
+            rearLeft.desiredState(-0.4, -0.125, Constants.DriveConstants.kTicksRearLeft);
+            rearRight.desiredState(0.4, 0.125, Constants.DriveConstants.kTicksRearRight);
+        }
+    }
+}
 
   public void noPTR(){
     frontLeft.resetToAbsolute(Constants.DriveConstants.kTicksFrontLeft);

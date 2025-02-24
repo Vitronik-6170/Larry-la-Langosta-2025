@@ -37,7 +37,7 @@ public class Cage extends SubsystemBase {
     right_cageConfig = new SparkMaxConfig();
     right_cageConfig.idleMode(IdleMode.kBrake);
     right_cageConfig.inverted(true);
-    right_cageConfig.absoluteEncoder.inverted(false);
+    right_cageConfig.absoluteEncoder.inverted(true );
     right_cageConfig.absoluteEncoder.positionConversionFactor(2*Math.PI);
     right_cageConfig.absoluteEncoder.zeroOffset(Constants.CageConstants.kCageEncoderOffset);
     right_cageConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
@@ -55,14 +55,18 @@ public class Cage extends SubsystemBase {
   public void prepareToHang() {
     right_cageController.setReference(Constants.CageConstants.kCagePrepareToHang, ControlType.kPosition);
   }
-  public void hang() {
-    right_cageMotor.set(1);
-
-    if (right_cageAbsoluteEncoder.getPosition() > 0.5) {
-      left_cageMotor.set(1);
-    }
+  public void hang(){
+    right_cageController.setReference(Constants.CageConstants.kCagePrepareToHang, ControlType.kPosition);
   }
-  public void stop() {
+  public void hanging() {
+    right_cageMotor.set(Constants.CageConstants.kRight_PowerCageHang);
+    left_cageMotor.set(Constants.CageConstants.kLeft_PowerCageHang);
+  }
+  public void desHanging() {
+    right_cageMotor.set(-Constants.CageConstants.kRight_PowerCageHang);
+    left_cageMotor.set(-Constants.CageConstants.kLeft_PowerCageHang);
+  }
+  public void stopCage() {
     right_cageMotor.set(0);
     left_cageMotor.set(0);
   }
