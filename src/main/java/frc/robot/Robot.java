@@ -7,12 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
 import frc.robot.commands.GrabGamePiece;
-import frc.robot.commands.PruebaAuto;
+import frc.robot.commands.AutoCage1;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -39,7 +38,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     drive = new Drive(m_robotContainer.m_swerveDrive);
-    auto = new PruebaAuto(m_robotContainer.m_swerveDrive);
+    auto = new AutoCage1(m_robotContainer.m_swerveDrive);
     grabGamePiece = new GrabGamePiece(m_robotContainer.m_Intake);
   }
 

@@ -70,6 +70,9 @@ public class Cage extends SubsystemBase {
     right_cageMotor.set(0);
     left_cageMotor.set(0);
   }
+  public double getAbsoluteEncoderCage(){
+    return right_cageAbsoluteEncoder.getPosition();
+  }
 
   /**
    * Example command factory method.
