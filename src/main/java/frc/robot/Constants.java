@@ -102,9 +102,9 @@ public final class Constants {
     public static final double kCagePrepareToHang = Math.PI/2;
     public static final double kCageHang =Math.PI;
     
-    public static final double kKaleb = 4.18;
-    public static final double kLeft_PowerCageHang = 0.1;
-    public static final double kRight_PowerCageHang = kLeft_PowerCageHang * kKaleb;
+    public static final double kKaleb = 7;
+    public static final double kRight_PowerCageHang = 0.1;
+    public static final double kLeft_PowerCageHang = kRight_PowerCageHang* kKaleb;
 
   }
   
