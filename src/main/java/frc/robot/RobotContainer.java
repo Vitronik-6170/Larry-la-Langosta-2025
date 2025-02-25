@@ -7,6 +7,10 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AdjustArmDown;
 import frc.robot.commands.AdjustArmUp;
+import frc.robot.commands.AutoCage1;
+import frc.robot.commands.AutoCage2;
+import frc.robot.commands.AutoCage3;
+import frc.robot.commands.AutoSalir;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DesHanging;
 import frc.robot.commands.ExampleCommand;
@@ -98,8 +102,16 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+  public Command getAutonomousCommand(String selection) {
+    if(selection.equals("A")){
+      return new AutoCage1(m_swerveDrive);
+    }else if(selection.equals("B")){
+      return new AutoCage2(m_swerveDrive);
+    }else if(selection.equals("C")){
+      return new AutoCage3(m_swerveDrive);
+    }else if(selection.equals("D")){
+      return new AutoSalir(m_swerveDrive);
+    }
+    return null;
   }
 }
