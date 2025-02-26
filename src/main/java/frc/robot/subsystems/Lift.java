@@ -89,31 +89,52 @@ public class Lift extends SubsystemBase {
     right_liftController.setReference(level, ControlType.kPosition);
   }
   public void goToHuman() {
-    double level = Constants.LiftConstants.kLiftHuman;
+    double level = Constants.LiftConstants.kLiftFloor;
     left_liftController.setReference(level, ControlType.kPosition);
     right_liftController.setReference(level, ControlType.kPosition);
   }
 
 
   public void goToReef_L1() {
-    double level = Constants.LiftConstants.kLEFTLiftReef_L2;
-    left_liftController.setReference(level, ControlType.kPosition);
-    right_liftController.setReference(level, ControlType.kPosition);
+    double leftLevel = Constants.LiftConstants.kLEFTLiftReef_L2;
+    double rightLevel = Constants.LiftConstants.kRIGHTLiftReef_L2;
+    left_liftController.setReference(leftLevel, ControlType.kPosition);
+    right_liftController.setReference(rightLevel, ControlType.kPosition);
   }
   public void goToReef_L2() {
-    double level = Constants.LiftConstants.kLEFTLiftReef_L2;
-    left_liftController.setReference(level, ControlType.kPosition);
-    right_liftController.setReference(level, ControlType.kPosition);
+    double leftLevel = Constants.LiftConstants.kLEFTLiftReef_L2;
+    double rightLevel = Constants.LiftConstants.kRIGHTLiftReef_L2;
+    left_liftController.setReference(leftLevel, ControlType.kPosition);
+    right_liftController.setReference(rightLevel, ControlType.kPosition);
   }
   public void goToReef_L3() {
-    double level = Constants.LiftConstants.kLEFTLiftReef_L3;
-    left_liftController.setReference(level, ControlType.kPosition);
-    right_liftController.setReference(level, ControlType.kPosition);
+    double leftLevel = Constants.LiftConstants.kLEFTLiftReef_L3;
+    double rightLevel = Constants.LiftConstants.kRIGHTLiftReef_L3;
+    left_liftController.setReference(leftLevel, ControlType.kPosition);
+    right_liftController.setReference(rightLevel, ControlType.kPosition);
+  }
+  public void liftOut(){
+    double leftLevel = Constants.LiftConstants.kLEFTLiftTop;
+    double rightLevel = Constants.LiftConstants.kRIGHTLiftTop;
+    left_liftController.setReference(leftLevel, ControlType.kPosition);
+    right_liftController.setReference(rightLevel, ControlType.kPosition);
   }
 
   public void getAbsoluteEncoder()  {
     left_liftEncoder.getPosition();
     right_liftEncoder.getPosition();
+  }
+  public void setCoast(){
+    left_liftConfig.idleMode(IdleMode.kCoast);
+    left_liftMotor.configure(left_liftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    right_liftConfig.idleMode(IdleMode.kCoast);
+    right_liftMotor.configure(right_liftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+  }
+  public void setBrake(){
+    left_liftConfig.idleMode(IdleMode.kBrake);
+    left_liftMotor.configure(left_liftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    right_liftConfig.idleMode(IdleMode.kBrake);
+    right_liftMotor.configure(right_liftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   /**

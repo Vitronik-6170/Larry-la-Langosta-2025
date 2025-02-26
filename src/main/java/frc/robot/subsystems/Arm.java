@@ -27,6 +27,8 @@ public class Arm extends SubsystemBase {
   private final AbsoluteEncoder armEncoder;
   private final SparkClosedLoopController armController;
 
+  int noCoast=0;
+
   private int positionIndex = 0;
   private static final double[] POSITIONS = {Constants.ArmConstants.kArmReef_L1, Constants.ArmConstants.kArmReef_L2, Constants.ArmConstants.kArmReef_L3};
 
@@ -100,8 +102,8 @@ public class Arm extends SubsystemBase {
     armController.setReference(position, ControlType.kPosition);
   }
 
-  public void armInit(){
-    armController.setReference(Constants.ArmConstants.kArmInit, ControlType.kPosition);
+  public void armOut(){
+    armController.setReference(Constants.ArmConstants.kArmOut, ControlType.kPosition);
   }
   public void stop(){
     armController.setReference(getArmPosition(), ControlType.kPosition);
@@ -109,6 +111,21 @@ public class Arm extends SubsystemBase {
   public double getArmPosition(){
     return armEncoder.getPosition();
   }
+  public void setBrake(){
+    armConfig.idleMode(IdleMode.kBrake);
+    armMotor.configure(armConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+  }
+  public void setCoast(){
+    if(noCoast==0){
+      armConfig.idleMode(IdleMode.kCoast);
+      armMotor.configure(armConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+      noCoast++;
+    }else{
+      armConfig.idleMode(IdleMode.kBrake);
+      armMotor.configure(armConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    }
+  }
+
 
   /**
    * Example command factory method.

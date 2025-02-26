@@ -43,6 +43,7 @@ public class SwerveModule extends SubsystemBase {
     driveConfig = new SparkMaxConfig();
     driveConfig.idleMode(IdleMode.kBrake);
     driveConfig.inverted(false);
+    driveConfig.closedLoopRampRate(0.5);
     driveConfig.closedLoop.pid(0.1, 0.6, 1);
     driveConfig.closedLoop.iZone(0.0002);
     driveConfig.closedLoop.outputRange(-1, 1);
@@ -112,6 +113,11 @@ public class SwerveModule extends SubsystemBase {
     angleConfig.idleMode(IdleMode.kBrake);
     angleMotor.configure(angleConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
+  public void changeVelocityAuto(double speed){
+    driveConfig.closedLoop.outputRange(-speed, speed);
+    driveConfig.idleMode(IdleMode.kBrake);
+  }
+
 
 
   /**

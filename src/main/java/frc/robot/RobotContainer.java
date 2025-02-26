@@ -11,7 +11,6 @@ import frc.robot.commands.AutoCage1;
 import frc.robot.commands.AutoCage2;
 import frc.robot.commands.AutoCage3;
 import frc.robot.commands.AutoSalir;
-import frc.robot.commands.Autos;
 import frc.robot.commands.DesHanging;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Floor;
@@ -104,13 +103,13 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand(String selection) {
     if(selection.equals("A")){
-      return new AutoCage1(m_swerveDrive);
+      return new AutoCage3(m_swerveDrive, m_Arm, m_Lift, m_Wrist, m_Intake);
     }else if(selection.equals("B")){
-      return new AutoCage2(m_swerveDrive);
+      return new AutoCage2(m_swerveDrive, m_Arm, m_Lift, m_Wrist, m_Intake);
     }else if(selection.equals("C")){
-      return new AutoCage3(m_swerveDrive);
+      return new AutoCage1(m_swerveDrive, m_Arm, m_Lift, m_Wrist, m_Intake);
     }else if(selection.equals("D")){
-      return new AutoSalir(m_swerveDrive);
+      return new AutoSalir(m_swerveDrive, m_Arm, m_Lift);
     }
     return null;
   }

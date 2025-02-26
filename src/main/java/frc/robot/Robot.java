@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
 import frc.robot.commands.GrabGamePiece;
-import frc.robot.commands.AutoCage1;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -26,7 +25,7 @@ public class Robot extends TimedRobot {
   private final RobotContainer m_robotContainer;
   @SuppressWarnings("unused")
   private final PowerDistribution pdh;
-  private final Command drive, auto, grabGamePiece;
+  private final Command drive, grabGamePiece;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   /**
@@ -41,11 +40,10 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     drive = new Drive(m_robotContainer.m_swerveDrive);
-    auto = new AutoCage1(m_robotContainer.m_swerveDrive);
     grabGamePiece = new GrabGamePiece(m_robotContainer.m_Intake);
-    m_chooser.addOption("Auto cage 1", "A");
+    m_chooser.addOption("Auto cage 3", "A");
     m_chooser.addOption("Auto cage 2", "B");
-    m_chooser.addOption("Auto cage 3", "C");
+    m_chooser.addOption("Auto cage 1", "C");
     m_chooser.addOption("Auto salir", "D");
     SmartDashboard.putData(m_chooser);
   }
@@ -69,17 +67,20 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    m_robotContainer.m_swerveDrive.setCoast();
+    m_robotContainer.m_Lift.setCoast();
+    m_robotContainer.m_Arm.setCoast();
   }
 
   @Override
-  public void disabledPeriodic() {
-    m_robotContainer.m_swerveDrive.setCoast();
-  }
+  public void disabledPeriodic() {}
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
     m_robotContainer.m_swerveDrive.setBrake();
+    m_robotContainer.m_Lift.setBrake();
+    m_robotContainer.m_Arm.setBrake();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_chooser.getSelected());
     
     // schedule the autonomous command (example)
@@ -104,11 +105,11 @@ public class Robot extends TimedRobot {
     // continue until interrupted by another command, remove
     // this line or comment it out.
     m_robotContainer.m_swerveDrive.setBrake();
+    m_robotContainer.m_Lift.setBrake();
+    m_robotContainer.m_Arm.setBrake();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
-    m_robotContainer.m_Arm.armInit();
     
     if(drive != null){
       drive.schedule();

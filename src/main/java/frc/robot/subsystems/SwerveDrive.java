@@ -209,6 +209,12 @@ public class SwerveDrive extends SubsystemBase {
     rearLeft.desiredAngle(-0.125);
     rearRight.desiredAngle(0.125);
   }
+  public void reducespeedAuto(double speed){
+    frontLeft.changeVelocityAuto(speed);
+    frontRight.changeVelocityAuto(speed);
+    rearLeft.changeVelocityAuto(speed);
+    rearRight.changeVelocityAuto(speed);
+  }
   public void resetDrive(){
     frontLeft.resetEncoder();
     frontRight.resetEncoder();
