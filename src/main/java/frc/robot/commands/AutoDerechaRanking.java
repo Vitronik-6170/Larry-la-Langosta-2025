@@ -49,27 +49,27 @@ public class AutoDerechaRanking extends Command {
       m_Swerve.noPTR();
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
-    }else if (timer.get() > 1 && timer.get() < 4.5) {
+    }else if (timer.get() > 1 && timer.get() < 2) {
       m_Lift.liftOut();
-    }else if(timer.get() > 4.6 && timer.get() < 6.6){
+    }else if(timer.get() > 2.1 && timer.get() < 4.1){
       m_Arm.armOut();
-    }else if(timer.get() > 6.7 && timer.get() < 8.3 ){
+    }else if(timer.get() > 4.2 && timer.get() < 5.5 ){
       m_Lift.goToFloor();
-      m_Swerve.driveOdometri(0.5);
-    }else if (timer.get() > 8.4 && timer.get() < 8.5){
+      m_Swerve.driveOdometri(1);
+    }else if (timer.get() > 5.6 && timer.get() < 5.7){
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
-    }else if(timer.get() > 8.6 && timer.get() < 8.9){
-      m_Swerve.angleOdometri(0.125);
-    }else if(timer.get() > 8.9 && timer.get() < 9.5){
-      m_Swerve.driveOdometri(0.5);
-    }else if (timer.get() > 9.6 && timer.get() < 9.9){
+    }else if(timer.get() > 5.8 && timer.get() < 6.5){
+      m_Swerve.angleOdometri(0.25);
+    }else if(timer.get() > 6.6 && timer.get() < 8.5){
+      m_Swerve.driveOdometri(1);
+    }else if (timer.get() > 8.6 && timer.get() < 8.7){
       m_Swerve.angleOdometri(0);
-    }else if(timer.get() > 10 && timer.get() < 11){
+    }else if(timer.get() > 8.8 && timer.get() < 9.9){
       m_Swerve.odometriTurn(0);
-    }else if(timer.get() > 11.1 && timer.get() < 15){
+    }else if(timer.get() > 10 && timer.get() < 15){
       m_Swerve.reducespeedAuto(0.2);
-      m_Swerve.driveOdometri(5);
+      m_Swerve.driveOdometri(-5);
     }else{
       m_Swerve.drive(0, 0, 0);
     }

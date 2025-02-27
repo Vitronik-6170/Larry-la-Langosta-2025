@@ -54,11 +54,11 @@ public class AutoSalir extends Command {
       m_Arm.armOut();
     }else if(timer.get() > 4.2 && timer.get() < 5.5 ){
       m_Lift.goToFloor();
-      m_Swerve.driveOdometri(0);
-    }else if (timer.get() > 5.5 && timer.get() < 7.5){
+      m_Swerve.driveOdometri(-2);
+    }else if (timer.get() > 5.6 && timer.get() < 5.7){
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
-    }else if(timer.get() > 7.6 && timer.get() < 8.6){
+    }else if(timer.get() > 5.8 && timer.get() < 6.8){
       m_Swerve.odometriTurn(0);
     }else if(timer.get() > 8.6 && timer.get() < 11.3){
     }else if (timer.get() > 11.4 && timer.get() < 12.1){

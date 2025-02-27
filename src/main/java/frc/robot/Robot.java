@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -25,6 +27,7 @@ public class Robot extends TimedRobot {
   private final RobotContainer m_robotContainer;
   @SuppressWarnings("unused")
   private final PowerDistribution pdh;
+  private final UsbCamera camara1;
   private final Command drive, grabGamePiece;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
@@ -35,6 +38,11 @@ public class Robot extends TimedRobot {
   public Robot() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    camara1 = CameraServer.startAutomaticCapture(0);
+    camara1.setBrightness(30);
+    camara1.setResolution(10, 10);
+    camara1.setFPS(5);
+
     pdh = new PowerDistribution(1, ModuleType.kRev);
 
     m_robotContainer = new RobotContainer();
@@ -45,6 +53,8 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Auto cage 2", "B");
     m_chooser.addOption("Auto cage 1", "C");
     m_chooser.addOption("Auto salir", "D");
+    m_chooser.addOption("Auto Derecha Ranking", "E");
+    m_chooser.addOption("Auto Izquierda Ranking", "F");
     SmartDashboard.putData(m_chooser);
   }
 

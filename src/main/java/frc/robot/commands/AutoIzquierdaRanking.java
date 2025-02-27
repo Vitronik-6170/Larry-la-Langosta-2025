@@ -49,21 +49,27 @@ public class AutoIzquierdaRanking extends Command {
       m_Swerve.noPTR();
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
-    }else if (timer.get() > 1 && timer.get() < 4.5) {
+    }else if (timer.get() > 1 && timer.get() < 2) {
       m_Lift.liftOut();
-    }else if(timer.get() > 4.6 && timer.get() < 6.6){
+    }else if(timer.get() > 2.1 && timer.get() < 4.1){
       m_Arm.armOut();
-    }else if(timer.get() > 6.7 && timer.get() < 8.3 ){
+    }else if(timer.get() > 4.2 && timer.get() < 5.5 ){
       m_Lift.goToFloor();
-      m_Swerve.driveOdometri(2);
-    }else if (timer.get() > 8.4 && timer.get() < 8.5){
+      m_Swerve.driveOdometri(0.5);
+    }else if (timer.get() > 5.6 && timer.get() < 5.7){
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
-    }else if(timer.get() > 8.6 && timer.get() < 9.6){
+    }else if(timer.get() > 5.8 && timer.get() < 6.1){
+      m_Swerve.angleOdometri(0.125);
+    }else if(timer.get() > 6.2 && timer.get() < 7.3){
+      m_Swerve.driveOdometri(-0.5);
+    }else if (timer.get() > 7.4 && timer.get() < 8.4){
+      m_Swerve.angleOdometri(0);
+    }else if(timer.get() > 8.5 && timer.get() < 9.5){
       m_Swerve.odometriTurn(0);
-    }else if(timer.get() > 9.6 && timer.get() < 12.3){
-    }else if (timer.get() > 12.4 && timer.get() < 13.1){
-    }else if(timer.get() > 13.1 && timer.get() < 15){
+    }else if(timer.get() > 9.6 && timer.get() < 15){
+      m_Swerve.reducespeedAuto(0.2);
+      m_Swerve.driveOdometri(-5);
     }else{
       m_Swerve.drive(0, 0, 0);
     }

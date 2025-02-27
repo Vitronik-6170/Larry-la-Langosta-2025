@@ -54,26 +54,26 @@ public class AutoCage1 extends Command {
       m_Swerve.noPTR();
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
-    }else if (timer.get() > 1 && timer.get() < 4.5) {
+    }else if (timer.get() > 1 && timer.get() < 2) {
       m_Lift.liftOut();
       m_Swerve.diagonalAngle(1.3, -2.8);//angulo
-    }else if(timer.get() > 4.6 && timer.get() < 6.6){
+    }else if(timer.get() > 2.1 && timer.get() < 4.1){
       m_Arm.armOut();
-    }else if(timer.get() > 6.7 && timer.get() < 8.3 ){
+    }else if(timer.get() > 4.2 && timer.get() < 5.9){
       m_Lift.goToFloor();
-      m_Swerve.diagonalOdometri(1.3, -2.8);//distancia
-    }else if (timer.get() > 8.4 && timer.get() < 8.5){
+      //m_Swerve.diagonalOdometri(1.3, -2.8);//distancia
+    }else if (timer.get() > 6 && timer.get() < 6.1){
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
-    }else if(timer.get() > 8.6 && timer.get() < 9.6){
+    }else if(timer.get() > 6.2 && timer.get() < 7.2){
       m_Swerve.odometriTurn(0);
-    }else if(timer.get() > 9.6 && timer.get() < 12.3){
+    }else if(timer.get() > 7.3 && timer.get() < 9.3){
       m_Lift.goToReef_L1();
       m_Arm.setToReef_L1();
       m_Wrist.horizontalWrist();
-    }else if (timer.get() > 12.4 && timer.get() < 13.1){
-      m_Intake.grabGamePiece(0.5);
-    }else if(timer.get() > 13.1 && timer.get() < 15){
+    }else if (timer.get() > 9.4 && timer.get() < 10.1){
+      m_Intake.grabGamePiece(-0.5);
+    }else if(timer.get() > 10.1 && timer.get() < 15){
     }else{
       m_Swerve.drive(0, 0, 0);
     }
