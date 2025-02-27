@@ -107,8 +107,8 @@ public final class Constants {
 
     
     public static final double kKaleb = 7;
-    public static final double kRight_PowerCageHang = 0.1;
-    public static final double kLeft_PowerCageHang = 0.1;
+    public static final double kRight_PowerCageHang = 0.15;
+    public static final double kLeft_PowerCageHang = 0.15;
 
   }
   

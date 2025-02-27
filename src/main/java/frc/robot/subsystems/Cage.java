@@ -61,11 +61,12 @@ public class Cage extends SubsystemBase {
     right_cageController.setReference(Constants.CageConstants.kCageHang, ControlType.kPosition);
   }
   public void hanging() {
-    if(right_cageAbsoluteEncoder.getPosition()>Constants.CageConstants.kCageInit){
-      right_cageMotor.set(0);
-    }else{
-      right_cageMotor.set(Constants.CageConstants.kRight_PowerCageHang);
-    }
+    // if(right_cageAbsoluteEncoder.getPosition()>Constants.CageConstants.kCageInit){
+    //   right_cageMotor.set(0);
+    // }else{
+    //   right_cageMotor.set(Constants.CageConstants.kRight_PowerCageHang);
+    // }
+    right_cageMotor.set(Constants.CageConstants.kRight_PowerCageHang);
   }
   public void desHanging() {
     right_cageMotor.set(-Constants.CageConstants.kRight_PowerCageHang);
