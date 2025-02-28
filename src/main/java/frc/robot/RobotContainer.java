@@ -22,6 +22,7 @@ import frc.robot.commands.Human;
 import frc.robot.commands.PrepareToHang;
 import frc.robot.commands.ReefDown;
 import frc.robot.commands.ReefUp;
+import frc.robot.commands.ReleaseArm;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Cage;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -96,6 +97,7 @@ public class RobotContainer {
     m_mechanismsController.pov(270).whileTrue(new Hang(m_Cage));
     m_mechanismsController.b().whileTrue(new Hanging(m_Cage));
     m_mechanismsController.y().whileTrue(new DesHanging(m_Cage));
+    m_mechanismsController.leftStick().whileTrue(new ReleaseArm(m_Lift));
   }
 
   /**
@@ -117,6 +119,6 @@ public class RobotContainer {
     }else if(selection.equals("F")){
       return new AutoIzquierdaRanking(m_swerveDrive, m_Arm, m_Lift);
     }
-    return null;
+    return new AutoSalir(m_swerveDrive, m_Arm, m_Lift);
   }
 }

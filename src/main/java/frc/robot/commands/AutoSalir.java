@@ -48,10 +48,12 @@ public class AutoSalir extends Command {
       m_Swerve.noPTR();
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
+      m_Arm.aceleration(0.9);
     }else if (timer.get() > 1 && timer.get() < 2) {
       m_Lift.liftOut();
     }else if(timer.get() > 2.1 && timer.get() < 4.1){
       m_Arm.armOut();
+      m_Arm.aceleration(0.8);
     }else if(timer.get() > 4.2 && timer.get() < 5.5 ){
       m_Lift.goToFloor();
       m_Swerve.driveOdometri(-2);

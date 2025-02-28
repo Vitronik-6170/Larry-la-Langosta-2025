@@ -111,6 +111,10 @@ public class Arm extends SubsystemBase {
   public double getArmPosition(){
     return armEncoder.getPosition();
   }
+  public void aceleration(double acc){
+    armConfig.closedLoop.outputRange(-acc, acc);
+    armMotor.configure(armConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+  }
   public void setBrake(){
     armConfig.idleMode(IdleMode.kBrake);
     armMotor.configure(armConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);

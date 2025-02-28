@@ -75,6 +75,12 @@ public class Lift extends SubsystemBase {
     }
     setLevel();
   }
+  public void aceleraton(double acc){
+    left_liftConfig.closedLoop.outputRange(-acc, acc);
+    right_liftConfig.closedLoop.outputRange(-acc, acc);
+    left_liftMotor.configure(left_liftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    right_liftMotor.configure(right_liftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+  }
 
   private void setLevel() {
     double leftLevel = LEFT_LEVELS[levelIndex];
@@ -120,9 +126,17 @@ public class Lift extends SubsystemBase {
     right_liftController.setReference(rightLevel, ControlType.kPosition);
   }
 
-  public void getAbsoluteEncoder()  {
-    left_liftEncoder.getPosition();
-    right_liftEncoder.getPosition();
+  public double getAbsoluteEncoderR()  {
+    return right_liftEncoder.getPosition();
+  }
+
+  public double getAbsoluteEncoderL(){
+    return left_liftEncoder.getPosition();
+  }
+
+  public void stop(){
+    left_liftController.setReference(getAbsoluteEncoderL(), ControlType.kPosition);
+    right_liftController.setReference(getAbsoluteEncoderR(), ControlType.kPosition);
   }
   public void setCoast(){
     left_liftConfig.idleMode(IdleMode.kCoast);

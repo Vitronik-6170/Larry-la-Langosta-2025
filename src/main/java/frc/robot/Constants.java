@@ -54,13 +54,13 @@ public final class Constants {
     public static final double kLEFTLiftReef_L2 = 0;
     public static final double kLEFTLiftReef_L3 = 74.28549194335;
     public static final double kLEFTLiftAlgae = 50.85717391967;
-    public static final double kLEFTLiftTop = 90.57318878173;
+    public static final double kLEFTLiftTop = 85.57318878173;
 
     public static final double kRIGHTLiftReef_L1 = 70.57318878173;
     public static final double kRIGHTLiftReef_L2 = 0;
     public static final double kRIGHTLiftReef_L3 = 74.04737472534;
     public static final double kRIGHTLiftAlgae = 50.54761886596;
-    public static final double kRIGHTLiftTop = 90.57318878173;    
+    public static final double kRIGHTLiftTop = 85.57318878173;    
   }
   public static class IntakeConstants {
     public static final int kIntakeMotorID = 15;
@@ -82,7 +82,7 @@ public final class Constants {
   public static class ArmConstants {
     public static final int kArmMotorID = 14;
     public static final double kArmEncoderOffset = 0.71;
-    public static final double kArmPower = 0.5;
+    public static final double kArmPower = 0.8;
 
     public static final double kArmOut = 3;
 
