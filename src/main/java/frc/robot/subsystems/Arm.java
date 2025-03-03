@@ -42,6 +42,7 @@ public class Arm extends SubsystemBase {
     armConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
     armConfig.closedLoop.pid(1, 0, 0);
     armConfig.closedLoop.outputRange(-Constants.ArmConstants.kArmPower, Constants.ArmConstants.kArmPower);
+    armConfig.closedLoopRampRate(0.001);
 
     armMotor = new SparkMax(Constants.ArmConstants.kArmMotorID, MotorType.kBrushless);
     armEncoder = armMotor.getAbsoluteEncoder();

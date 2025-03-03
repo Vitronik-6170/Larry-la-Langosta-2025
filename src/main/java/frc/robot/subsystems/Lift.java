@@ -75,12 +75,6 @@ public class Lift extends SubsystemBase {
     }
     setLevel();
   }
-  public void aceleraton(double acc){
-    left_liftConfig.closedLoop.outputRange(-acc, acc);
-    right_liftConfig.closedLoop.outputRange(-acc, acc);
-    left_liftMotor.configure(left_liftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    right_liftMotor.configure(right_liftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-  }
 
   private void setLevel() {
     double leftLevel = LEFT_LEVELS[levelIndex];

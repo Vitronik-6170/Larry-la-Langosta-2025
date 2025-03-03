@@ -46,7 +46,7 @@ public class SwerveModule extends SubsystemBase {
     driveConfig.closedLoopRampRate(0.5);
     driveConfig.closedLoop.pid(0.1, 0.6, 1);
     driveConfig.closedLoop.iZone(0.0002);
-    driveConfig.closedLoop.outputRange(-1, 1);
+    driveConfig.closedLoop.outputRange(-0.2, 0.3);
 
     angleConfig = new SparkMaxConfig();
     angleConfig.idleMode(IdleMode.kBrake);

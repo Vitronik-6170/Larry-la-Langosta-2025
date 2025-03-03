@@ -5,17 +5,21 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.Wrist;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class AutoSalir extends Command {
+public class AutoCentro extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final SwerveDrive m_Swerve;
   private final Arm m_Arm;
   private final Lift m_Lift;
+  private final Wrist m_Wrist;
+  private final Intake m_Intake;
 
   private final Timer timer;
 
@@ -24,13 +28,15 @@ public class AutoSalir extends Command {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoSalir(SwerveDrive m_Swerve, Arm m_Arm ,Lift m_Lift) {
+  public AutoCentro(SwerveDrive m_Swerve, Arm m_Arm ,Lift m_Lift, Wrist m_Wrist, Intake m_Intake) {
     this.m_Swerve = m_Swerve;
     this.m_Arm = m_Arm;
     this.m_Lift = m_Lift;
+    this.m_Wrist = m_Wrist;
+    this.m_Intake = m_Intake;
     timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_Swerve, m_Arm, m_Lift);
+    addRequirements(m_Swerve, m_Arm, m_Lift, m_Wrist, m_Intake);
   }
 
   // Called when the command is initially scheduled.
@@ -57,15 +63,16 @@ public class AutoSalir extends Command {
     }else if(timer.get() > 4.2 && timer.get() < 6.5 ){
       m_Lift.goToFloor();
       //m_Swerve.driveOdometri(-2);
-    }else if(timer.get() > 6.6 && timer.get() < 12 ){
-      m_Swerve.driveOdometri(-5);
-    }else if (timer.get() > 12.1 && timer.get() < 12.2){
+    }else if(timer.get() > 6.6 && timer.get() < 9 ){
+      m_Swerve.driveOdometri(-1.7);
+    }else if (timer.get() > 9.1 && timer.get() < 9.2){
       m_Swerve.resetDrive();
       m_Swerve.driveOdometri(0);
-    }else if(timer.get() > 12.3 && timer.get() < 14){
-      m_Swerve.odometriTurn(0);
-      m_Arm.grabFromHuman();
-    }else if(timer.get() > 8.6 && timer.get() < 11.3){
+    }else if(timer.get() > 9.3 && timer.get() < 11){
+      m_Arm.setToReef_L2();
+      m_Wrist.horizontalWrist();
+    }else if(timer.get() > 11 && timer.get() < 11.3){
+      m_Intake.grabGamePiece(-0.2);
     }else if (timer.get() > 11.4 && timer.get() < 12.1){
     }else if(timer.get() > 12.1 && timer.get() < 15){
     }else{

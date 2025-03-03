@@ -55,6 +55,8 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Auto salir", "D");
     m_chooser.addOption("Auto Derecha Ranking", "E");
     m_chooser.addOption("Auto Izquierda Ranking", "F");
+    m_chooser.addOption("Auto Centro", "G");
+    m_chooser.addOption("Auto Izq", "H");
     SmartDashboard.putData(m_chooser);
   }
 
@@ -83,7 +85,9 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    m_robotContainer.m_Arm.stop();
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override

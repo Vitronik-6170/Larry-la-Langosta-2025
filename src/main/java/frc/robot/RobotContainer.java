@@ -10,7 +10,9 @@ import frc.robot.commands.AdjustArmUp;
 import frc.robot.commands.AutoCage1;
 import frc.robot.commands.AutoCage2;
 import frc.robot.commands.AutoCage3;
+import frc.robot.commands.AutoCentro;
 import frc.robot.commands.AutoDerechaRanking;
+import frc.robot.commands.AutoIzq;
 import frc.robot.commands.AutoIzquierdaRanking;
 import frc.robot.commands.AutoSalir;
 import frc.robot.commands.DesHanging;
@@ -118,6 +120,10 @@ public class RobotContainer {
       return new AutoDerechaRanking(m_swerveDrive, m_Arm, m_Lift);
     }else if(selection.equals("F")){
       return new AutoIzquierdaRanking(m_swerveDrive, m_Arm, m_Lift);
+    }else if(selection.equals("G")){
+    return new AutoCentro(m_swerveDrive, m_Arm, m_Lift, m_Wrist, m_Intake);
+    }else if(selection.equals("H")){
+      return new AutoIzq(m_swerveDrive, m_Arm, m_Lift, m_Wrist, m_Intake);
     }
     return new AutoSalir(m_swerveDrive, m_Arm, m_Lift);
   }
